@@ -1,20 +1,10 @@
-# Comandos y Keymaps — saburou-nvim
+# Comandos Exclusivos — saburou-nvim
 
-> Leader: `<space>` | Local leader: `<space>`
+> Keymaps y comandos propios de esta configuración. No vienen en Neovim por defecto.
+>
+> Leader: `<space>`
 
-## Navegación y búsqueda
-
-| Tecla | Acción |
-| ----- | ------ |
-| `<leader>ff` | Buscar archivos (Telescope) |
-| `<leader>fg` | Buscar texto en el proyecto (Telescope live grep) |
-| `<leader>fb` | Buscar buffers abiertos |
-| `<leader>fo` | Buscar archivos recientes |
-| `<leader>ft` | Buscar comentarios TODO/FIX/NOTE |
-| `<Esc>` | Limpiar resaltado de búsqueda |
-| `;` | Entrar en modo comando (`:`) |
-
-## Buffers y archivos
+## Buffers y archivos (hzsr)
 
 | Tecla | Acción |
 | ----- | ------ |
@@ -24,14 +14,11 @@
 | `<A-c>` | Cerrar buffer (cerrar ventana) |
 | `<C-A-x>` | Cerrar todos los buffers (reemplazar ventanas) |
 | `<C-A-q>` | Cerrar todos los buffers y salir |
-| `ñ` | Agregar línea debajo del cursor |
-| `Ñ` | Agregar línea arriba del cursor |
-| `U` | Redo |
 | `:Bp` | Ir al buffer anterior |
 
 ## Editor — recortes (`<leader>`)
 
-Combinación: `<leader>` + **categoría** + **objeto**
+Sistema propio de recortes: `<leader>` + **categoría** + **objeto**
 
 ### Categorías
 
@@ -67,20 +54,34 @@ Combinación: `<leader>` + **categoría** + **objeto**
 | `<leader>;` | Agregar `;` al final de la línea |
 | `<leader>,` | Agregar `,` al final de la línea |
 
-## Ventanas y splits
+## Teclado español
 
 | Tecla | Acción |
 | ----- | ------ |
-| `<C-h>` | Mover foco a la ventana izquierda |
-| `<C-l>` | Mover foco a la ventana derecha |
-| `<C-k>` | Mover foco a la ventana superior |
-| `<C-j>` | Mover foco a la ventana inferior |
+| `ñ` | Agregar línea debajo del cursor |
+| `Ñ` | Agregar línea arriba del cursor |
+
+## Redo
+
+| Tecla | Acción |
+| ----- | ------ |
+| `U` | Redo (en vez de undo de línea) |
+
+## Navegación custom
+
+| Tecla | Acción |
+| ----- | ------ |
+| `;` | Entrar en modo comando (`:`) |
+| `<C-h>` | Mover foco a ventana izquierda |
+| `<C-l>` | Mover foco a ventana derecha |
+| `<C-k>` | Mover foco a ventana superior |
+| `<C-j>` | Mover foco a ventana inferior |
 | `<A-h>` | Scroll horizontal rápido izquierda |
 | `<A-l>` | Scroll horizontal rápido derecha |
 | `<A-H>` | Scroll horizontal izquierda |
 | `<A-L>` | Scroll horizontal derecha |
 
-## Terminal
+## Terminal (sabunv)
 
 | Tecla | Acción |
 | ----- | ------ |
@@ -89,18 +90,22 @@ Combinación: `<leader>` + **categoría** + **objeto**
 | `<A-i>` | Toggle terminal flotante (normal/terminal) |
 | `<C-x>` | Salir de modo terminal (en terminal mode) |
 
-## LSP y código
+## LSP custom
 
 | Tecla | Acción |
 | ----- | ------ |
-| `gr` | Ver referencias del símbolo bajo el cursor |
 | `<C-A-r>` | Renombrar símbolo |
-| `{` | Símbolo anterior (Aerial) |
-| `}` | Símbolo siguiente (Aerial) |
-| `<leader>q` | Toggle árbol de símbolos (Aerial) |
-| `<C-q>` | Toggle árbol de símbolos (Aerial) |
 
-## Git
+## Aerial (custom bindings)
+
+| Tecla | Acción |
+| ----- | ------ |
+| `{` | Símbolo anterior |
+| `}` | Símbolo siguiente |
+| `<leader>q` | Toggle árbol de símbolos |
+| `<C-q>` | Toggle árbol de símbolos |
+
+## Git (custom bindings)
 
 | Tecla | Acción |
 | ----- | ------ |
@@ -146,7 +151,7 @@ Combinación: `<leader>` + **categoría** + **objeto**
 | ----- | ---- | ------ |
 | `<C-.>` | normal/terminal | Toggle Codex popup/panel |
 
-## Sesiones y reinicio
+## Sesiones y reinicio (sabunv)
 
 | Tecla / Comando | Acción |
 | --------------- | ------ |
@@ -157,7 +162,7 @@ Combinación: `<leader>` + **categoría** + **objeto**
 
 | Tecla | Acción |
 | ----- | ------ |
-| `<C-c>` | Copiar todo el contenido del buffer al clipboard del sistema |
+| `<C-c>` | Copiar todo el buffer al clipboard del sistema |
 
 ## UI
 
@@ -165,30 +170,15 @@ Combinación: `<leader>` + **categoría** + **objeto**
 | ----- | ------ |
 | Click derecho | Abrir menú contextual (volt/menu) |
 
-## Comandos de Neovim
+## Insert helpers
 
-| Comando | Acción |
-| ------- | ------ |
-| `:Lazy sync` | Sincronizar todos los plugins |
-| `:MasonInstallAll` | Instalar todas las herramientas de Mason |
-| `:TSInstallAll` | Instalar todos los parsers de Treesitter |
-| `:MruFile` | Abrir archivo más reciente usado |
-| `:MruBuffer` | Cambiar al buffer más reciente usado |
-| `:MruClearFiles` | Limpiar historial de archivos recientes |
-| `:Mason` | Abrir panel de Mason |
-| `:Telescope` | Abrir Telescope |
-| `:NvimTreeToggle` | Abrir/cerrar explorador de archivos |
-| `:NvimTreeFocus` | Enfocar explorador de archivos |
-| `:Codex` | Abrir Codex |
-| `:CodexToggle` | Toggle Codex |
-| `:Copilot` | Comando de Copilot |
-| `:Huefy` | Selector de colores |
-| `:Shades` | Variaciones de color |
-| `:WhichKey` | Mostrar keymaps disponibles |
+| Tecla | Modo | Acción |
+| ----- | ---- | ------ |
+| `<S-Tab>` | insert | Insertar tabulación real (`\t`) |
 
-## Diagnósticos
+## Diagnósticos custom
 
-Los diagnósticos LSP se muestran inline con iconos:
+Iconos configurados para diagnósticos LSP:
 
 | Icono | Severidad |
 | ----- | --------- |
@@ -196,9 +186,3 @@ Los diagnósticos LSP se muestran inline con iconos:
 | `` | Warning |
 | `󰋼` | Info |
 | `󰌵` | Hint |
-
-Navegación por defecto de Neovim:
-- `]d` — siguiente diagnóstico
-- `[d` — diagnóstico anterior
-- `]e` — siguiente error
-- `[e` — error anterior
