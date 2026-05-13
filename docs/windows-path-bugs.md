@@ -265,6 +265,8 @@ end
 
 ### Bug 2 — Mason: `lua/lzy/l_mason.lua`
 
+**Solución A (mínima) — aplicada en rama `bug-windows-paths-luarc-mason`:**
+
 Se cambió el separador hardcodeado `:` por uno condicional:
 
 ```lua
@@ -282,6 +284,31 @@ vim.env.PATH = mason_bin .. path_sep .. vim.env.PATH
 ```
 
 El PATH ahora usa `;` correctamente. Mason bin es la primera entrada.
+
+**Solución B (robusta) — aplicada en rama `bug-mason-path-entry-verification`:**
+
+Se reemplazó la verificación con `find()` por comparación entrada por entrada con normalización de slashes:
+
+```lua
+-- Lineas 23-37
+local already_in_path = false
+if vim.fn.has "win32" == 1 then
+  local mason_normalized = mason_bin:lower():gsub("[/\\]", "\\")
+  local entries = vim.split(vim.env.PATH, path_sep, { plain = true })
+  for _, entry in ipairs(entries) do
+    if entry:lower():gsub("[/\\]", "\\") == mason_normalized then
+      already_in_path = true
+      break
+    end
+  end
+else
+  if vim.env.PATH:find(vim.pesc(mason_bin), 1, true) then
+    already_in_path = true
+  end
+end
+```
+
+**Por qué:** `find()` puede dar falsos negativos cuando el PATH tiene el mismo directorio con formato diferente (`\` vs `/`). La comparación entrada por entrada normalizada evita esto.
 
 ## Resumen de cambios en el repo
 
