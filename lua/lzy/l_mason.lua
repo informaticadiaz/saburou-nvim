@@ -20,7 +20,23 @@ function M.init_setup()
   local mason_bin = vim.fn.stdpath "data" .. "/mason/bin"
   local path_sep = vim.fn.has "win32" == 1 and ";" or ":"
 
-  if not vim.env.PATH:find(vim.pesc(mason_bin), 1) then
+  local already_in_path = false
+  if vim.fn.has "win32" == 1 then
+    local mason_normalized = mason_bin:lower():gsub("[/\\]", "\\")
+    local entries = vim.split(vim.env.PATH, path_sep, { plain = true })
+    for _, entry in ipairs(entries) do
+      if entry:lower():gsub("[/\\]", "\\") == mason_normalized then
+        already_in_path = true
+        break
+      end
+    end
+  else
+    if vim.env.PATH:find(vim.pesc(mason_bin), 1, true) then
+      already_in_path = true
+    end
+  end
+
+  if not already_in_path then
     vim.env.PATH = mason_bin .. path_sep .. vim.env.PATH
   end
 
