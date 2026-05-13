@@ -18,9 +18,10 @@ M.opts = {
 
 function M.init_setup()
   local mason_bin = vim.fn.stdpath "data" .. "/mason/bin"
+  local path_sep = vim.fn.has "win32" == 1 and ";" or ":"
 
   if not vim.env.PATH:find(vim.pesc(mason_bin), 1) then
-    vim.env.PATH = mason_bin .. ":" .. vim.env.PATH
+    vim.env.PATH = mason_bin .. path_sep .. vim.env.PATH
   end
 
   vim.api.nvim_create_user_command("MasonInstallAll", function()

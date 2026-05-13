@@ -121,6 +121,16 @@ function M.generate_lazy(appname)
   return result
 end
 
+---@param p? string
+--- Normaliza barras a formato nativo en Windows.
+local function normalize_path(p)
+  if not p then return p end
+  if vim.fn.has "win32" == 1 then
+    return p:gsub("/", "\\")
+  end
+  return p
+end
+
 ---@param appname? string
 ---@return table
 function M.generate(appname)
@@ -132,6 +142,12 @@ function M.generate(appname)
 
   res.diagnostics.globals = dedup(res.diagnostics.globals)
   res.workspace.library = dedup(res.workspace.library)
+
+  if vim.fn.has "win32" == 1 then
+    for i, path in ipairs(res.workspace.library) do
+      res.workspace.library[i] = normalize_path(path)
+    end
+  end
 
   return res
 end
